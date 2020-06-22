@@ -34,10 +34,10 @@ def fun(x,i):
     #theta_v = x[N**2:]
     element = x[:N**2]
     phase_pred = []
-    for i in element:
-        if(i == 0):
+    for j in element:
+        if(j == 0):
             phase_pred.append(0)
-        if(i == 1):
+        if(j == 1):
             phase_pred.append(np.pi)   
     print(phase_pred)
         #omsriramajayam
@@ -69,15 +69,15 @@ dataframe = pd.read_excel('Coding_metamaterials_matrix.xlsx', header = None)
     #k[i] = 2*pi/lambda0[i]
     #D[i] = lambda0[i]#0.03#d=0.015 used for simulation by haoyang #lambda0/2
 x = np.zeros((1,100))  #Initialise numpy array x
-number_of_frequency_points = len(df_frequency)
+number_of_frequency_points = 100#len(df_frequency)
 for times in range(dataframe.shape[0]):  
-    for i in range(len(df_frequency)):  
+    for i in range(number_of_frequency_points):  
         x[times][:N**2] = dataframe.iloc[times,:N**2].to_numpy()#np.array((t,l)).ravel() 
         #x[times][N**2:] = dataframe.iloc[times,N**2:].to_numpy()   
         rcs_over_frequency['Combination_number_%d' %times] = fun(x[times],i)
         list_of_rcs_over_frequency.extend(rcs_over_frequency['Combination_number_%d' %times])
     
-for j in range(10):
+for j in range(dataframe.shape[0]):
     list_for_many_combinations['Combination_number_%d' %j] = list_of_rcs_over_frequency[number_of_frequency_points*j:number_of_frequency_points*j+number_of_frequency_points]#[len(df_v1)*j:len(df_v1)*j+len(df_v1)]
 
 #list_for_many_combinations.to_excel("RCS_over_all_frequencies_for_all_combinations.xlsx") 
