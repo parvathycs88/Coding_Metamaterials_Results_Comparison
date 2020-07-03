@@ -8,8 +8,8 @@ import time
 import matplotlib.pyplot as plt
 from matplotlib import rc,rcParams
 
-M = 49#64
-N = 64#49
+M = 25 #49#64
+N = 64 #49
 pi=np.pi
 
 theta_= np.linspace(0,pi/2,90)
@@ -55,9 +55,9 @@ lambda0 = np.zeros(number_of_frequency_points)
 k = np.zeros(number_of_frequency_points)
 D = np.zeros(number_of_frequency_points)
 
-dataframe = pd.read_excel('HuD_10points_supercell_repeated_complete.xlsx', header = None)
+dataframe = pd.read_excel('Coding_metamaterial_matrix_5by5supercell_Nequals8.xlsx', header = None)#pd.read_excel('HuD_10points_supercell_repeated_complete.xlsx', header = None)
 
-x = np.zeros((1,3136))
+x = np.zeros((1,1600))#((1,3136))
 #len(df_frequency)
 for times in range(dataframe.shape[0]):  
     for i in range(number_of_frequency_points):  
@@ -80,7 +80,7 @@ for k in range(list_for_many_combinations.shape[1]):
     plt.ylabel("RCS in dB")
     plt.title("RCS for %d combination of 0 and 1 elements from 7GHz to 14GHz \n" %k, loc = 'right')
     plt.plot(df_element0["frequency"][0:number_of_frequency_points],list_for_many_combinations['Combination_number_%d' %k])
-    plt.savefig("RCS over frequency for Combination using HuD points_%d_%%d.png" %k %number_of_frequency_points)
+    plt.savefig("RCS over frequency for Combination of 5by5 supercell and N = 8_%d_%%d.png" %k %number_of_frequency_points)
 plt.show()
 plt.ion() # helps to come to next line in command window without closing figures
 
