@@ -16,11 +16,14 @@ theta_= np.linspace(0,pi/2,90)
 phi_= np.linspace(0,2*pi,360)
 theta,phi = np.meshgrid(theta_,phi_) # Makind 2D grid
 
-df_element0 = pd.read_excel('./Coding_Metamaterials/Reflection_phase_of_elements_with_more_frequency_points.xlsx', sheet_name = 'Element0') 
-df_element1 = pd.read_excel('./Coding_Metamaterials/Reflection_phase_of_elements_with_more_frequency_points.xlsx', sheet_name = 'Element1') 
+#df_element0 = pd.read_excel('./Coding_Metamaterials/Reflection_phase_of_elements_with_more_frequency_points.xlsx', sheet_name = 'Element0') 
+#df_element1 = pd.read_excel('./Coding_Metamaterials/Reflection_phase_of_elements_with_more_frequency_points.xlsx', sheet_name = 'Element1') 
 
-df_element0["reflectionphase_unwrapped"] = np.unwrap(np.deg2rad(df_element0["reflectionphase"]))
-df_element1["reflectionphase_unwrapped"] = np.unwrap(np.deg2rad(df_element1["reflectionphase"]))
+#df_element0["reflectionphase_unwrapped"] = np.unwrap(np.deg2rad(df_element0["reflectionphase"]))
+#df_element1["reflectionphase_unwrapped"] = np.unwrap(np.deg2rad(df_element1["reflectionphase"]))
+
+df_element0 = pd.read_excel('./wideband_coding_metasurface/Reflectionphase_of_element.xlsx', sheet_name = 'Unit0') 
+df_element1 = pd.read_excel('./wideband_coding_metasurface/Reflectionphase_of_element.xlsx', sheet_name = 'Unit1') 
 
 def fun(x,i):
     element = x
@@ -49,7 +52,7 @@ def fun(x,i):
 rcs_over_frequency = {}#pd.DataFrame([])
 list_of_rcs_over_frequency = []
 list_for_many_combinations = pd.DataFrame([])
-number_of_frequency_points = 685 
+number_of_frequency_points = 397 #for wideband coding metasurface #685 for coding metamaterials
 
 lambda0 = np.zeros(number_of_frequency_points)
 k = np.zeros(number_of_frequency_points)
@@ -101,6 +104,6 @@ for k in range(list_for_many_combinations.shape[1]):
     plt.legend(['RCS reduction value over frequency'])
     plt.grid(True)
     
-    plt.savefig("Well Formatted RCS over frequency for Combination using HuD points_%d_%%d.png" %k %number_of_frequency_points, bbox_inches='tight')
+    plt.savefig("Well Formatted RCS over frequency for Combination of 5by5 supercell and N = 8_%d_%%d.png" %k %number_of_frequency_points, bbox_inches='tight')
     plt.show()
 	
